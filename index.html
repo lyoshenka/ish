@@ -12,7 +12,7 @@
 	<div class="nav url-change">
 		<form method="get" action="">
 			<label for="url" id="url-toggle" class="url-toggle">URL</label>
-		     <input id="url" type="url" name="url" placeholder="Enter any URL" />
+		     <input id="url" type="text" name="url" placeholder="Enter any URL" />
 		     <button id="url-submit">Go</button>
 		  </form>
 	</div>
@@ -71,7 +71,11 @@
             } 
             return query_string;
           }(),
-          src = queryString.url || 'http://usetopscore.com';
+          src = queryString.url || 'http://grin.io';
+
+      if (src.indexOf('http') !== 0) {
+        src = 'http://' + src;
+      }
 
       document.writeln('<iframe id="sg-viewport" src="'+src+'"></iframe>');
     </script>
