@@ -70,7 +70,7 @@
 		killDisco();
 		killHay();
 		fullMode = false;
-		window.location.hash = 's';
+		setHash('s');
 		changeActiveState($(this));
 		sizeSmall();
 	});
@@ -81,7 +81,7 @@
 		killDisco();
 		killHay();
 		fullMode = false;
-		window.location.hash = 'm';
+		setHash('m');
 		changeActiveState($(this));
 		sizeMedium();
 	});
@@ -92,7 +92,7 @@
 		killDisco();
 		killHay();
 		fullMode = false;
-		window.location.hash = 'l';
+		setHash('l');
 		changeActiveState($(this));
 		sizeLarge();
 	});
@@ -104,7 +104,7 @@
 		killHay();
 		changeActiveState($(this));
 		fullMode = true;
-		window.location.hash = '';
+		setHash('');
 		sizeiframe(sw);
 	});
 	
@@ -113,7 +113,7 @@
 		e.preventDefault();
 		fullMode = false;
 		sizeRandom();
-		window.location.hash = 'random';
+		setHash('random');
 	});
 
 	//Size Small
@@ -130,6 +130,11 @@
 	function sizeLarge() {
 		sizeiframe(getRandom(800,1200));
 	}
+
+  function setHash(hash) {
+    var baseUrl = window.location.href.split('#')[0];
+    window.location.replace(baseUrl + '#' + hash);
+  }
 
 	//Size Random Size
 	function sizeRandom() {
@@ -155,12 +160,12 @@
 		if (discoMode) {
 			killDisco();
 			changeActiveState();
-			window.location.hash = '';
+			setHash('');
 
 		} else {
 			startDisco();
 			changeActiveState($(this));
-			window.location.hash = 'disco';
+			setHash('disco');
 		}
 	});
 
@@ -188,11 +193,11 @@
 		if (hayMode) {
 			killHay();
 			changeActiveState();
-			window.location.hash = '';
+			setHash('');
 		} else {
 			startHay();
 			changeActiveState($(this));
-			window.location.hash = 'hay';
+			setHash('hay');
 		}
 	});
 
@@ -226,15 +231,15 @@
 		if(e.keyCode === 38) { //If the up arrow key is hit
 			val++;
 			sizeiframe(val,false);
-			window.location.hash = val;
+			setHash(val);
 		} else if(e.keyCode === 40) { //If the down arrow key is hit
 			val--;
 			sizeiframe(val,false);
-			window.location.hash = val;
+			setHash(val);
 		} else if(e.keyCode === 13) { //If the Enter key is hit
 			e.preventDefault();
 			sizeiframe(val); //Size Iframe to value of text box
-			window.location.hash = val;
+			setHash(val);
 			$(this).blur();
 		}
 		changeActiveState();
@@ -261,7 +266,7 @@
 		}
 		changeActiveState();
 		
-		window.location.hash = parseInt(val*$bodySize);
+		setHash(parseInt(val*$bodySize));
 	});
 
 	$sizeEms.on('keyup', function(){
@@ -371,7 +376,7 @@
 			if (viewportWidth > minViewportWidth) {
 				
 				
-				window.location.hash = viewportWidth;
+				setHash(viewportWidth);
 				sizeiframe(viewportWidth,false);
 			}
 		});
